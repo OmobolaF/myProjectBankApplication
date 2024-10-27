@@ -39,7 +39,7 @@ public class BankService {
         if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
             return null;                             // Return null if username or password is empty
         }
-        var account = accounts.get(username);        // Retrieve account by username
+        BankAccount account = accounts.get(username);        // Retrieve account by username
         if (account != null && account.password().equals(password)) {
             return account;                          // Return account if password matches
         }
@@ -74,7 +74,7 @@ public class BankService {
         if (username == null || username.isEmpty() || amount <= 0) {
             return;                                  // Return if username is empty or amount is invalid
         }
-        var account = accounts.get(username);        // Retrieve account by username
+        BankAccount account = accounts.get(username);        // Retrieve account by username
         if (account != null) {
             accounts.put(username, account.deposit(amount));  // Update account with new balance
             saveAccounts();                          // Save updated accounts to file
@@ -86,11 +86,11 @@ public class BankService {
         if (username == null || username.isEmpty() || amount <= 0) {
             return false;                            // Return false if username is empty or amount is invalid
         }
-        var account = accounts.get(username);        // Retrieve account by username
+        BankAccount account = accounts.get(username);        // Retrieve account by username
         if (account == null) {
             return false;                            // Return false if account does not exist
         }
-        var updatedAccount = account.withdraw(amount); // Attempt to withdraw amount
+        BankAccount updatedAccount = account.withdraw(amount); // Attempt to withdraw amount
         if (updatedAccount.balance() != account.balance()) { // Check if balance was updated
             accounts.put(username, updatedAccount);  // Update account with new balance
             saveAccounts();                          // Save updated accounts to file
@@ -104,7 +104,7 @@ public class BankService {
         if (username == null || username.isEmpty()) {
             return 0.0;                              // Return 0.0 if username is empty
         }
-        var account = accounts.get(username);        // Retrieve account by username
+        BankAccount account = accounts.get(username);        // Retrieve account by username
         return account != null ? account.balance() : 0.0;  // Return balance if account exists, else 0.0
     }
 }
