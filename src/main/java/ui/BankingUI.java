@@ -1,5 +1,9 @@
 package ui;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -7,9 +11,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 
 import service.BankService;
 
@@ -26,13 +27,13 @@ public class BankingUI {
     private void createLoginScreen() {
         frame = new JFrame("Banking Application");
 
-        var panel = new JPanel(new GridBagLayout());
+        JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5); // Padding around components
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         // Username Label
-        var userLabel = new JLabel("Username:");
+        JLabel userLabel = new JLabel("Username:");
         gbc.gridx = 0;
         gbc.gridy = 0;
         panel.add(userLabel, gbc);
