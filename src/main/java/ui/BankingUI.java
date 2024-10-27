@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import model.BankAccount;
 import service.BankService;
 
 public class BankingUI {
@@ -39,32 +40,32 @@ public class BankingUI {
         panel.add(userLabel, gbc);
 
         // Username Field
-        var usernameField = new JTextField(20);
+        JTextField usernameField = new JTextField(20);
         gbc.gridx = 1;
         gbc.gridy = 0;
         panel.add(usernameField, gbc);
 
         // Password Label
-        var passLabel = new JLabel("Password:");
+        JLabel passLabel = new JLabel("Password:");
         gbc.gridx = 0;
         gbc.gridy = 1;
         panel.add(passLabel, gbc);
 
         // Password Field
-        var passwordField = new JPasswordField(20);
+        JPasswordField passwordField = new JPasswordField(20);
         gbc.gridx = 1;
         gbc.gridy = 1;
         panel.add(passwordField, gbc);
 
         // Login Button
-        var loginButton = new JButton("Login");
+        JButton loginButton = new JButton("Login");
         gbc.gridx = 0;
         gbc.gridy = 2;
         gbc.gridwidth = 1;
         panel.add(loginButton, gbc);
 
         // Signup Button
-        var signupButton = new JButton("Sign Up");
+        JButton signupButton = new JButton("Sign Up");
         gbc.gridx = 1;
         gbc.gridy = 2;
         panel.add(signupButton, gbc);
@@ -75,15 +76,15 @@ public class BankingUI {
         frame.setVisible(true);
 
         loginButton.addActionListener(e -> {
-            var username = usernameField.getText().trim();
-            var password = new String(passwordField.getPassword()).trim();
+            String username = usernameField.getText().trim();
+            String password = new String(passwordField.getPassword()).trim();
 
             if (username.isEmpty() || password.isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "Username and password cannot be empty!");
                 return;
             }
 
-            var account = bankService.login(username, password);
+            BankAccount account = bankService.login(username, password);
             if (account != null) {
                 currentUser = username;
                 createBankingScreen();
@@ -93,8 +94,8 @@ public class BankingUI {
         });
 
         signupButton.addActionListener(e -> {
-            var username = usernameField.getText().trim();
-            var password = new String(passwordField.getPassword()).trim();
+            String username = usernameField.getText().trim();
+            String password = new String(passwordField.getPassword()).trim();
 
             if (username.isEmpty() || password.isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "Username and password cannot be empty!");
@@ -118,12 +119,12 @@ public class BankingUI {
         frame.getContentPane().removeAll();
         frame.repaint();
 
-        var balanceLabel = new JLabel("Balance: " + bankService.checkBalance(currentUser));
-        var depositButton = new JButton("Deposit");
-        var withdrawButton = new JButton("Withdraw");
-        var logoutButton = new JButton("Logout");
+        JLabel balanceLabel = new JLabel("Balance: " + bankService.checkBalance(currentUser));
+        JButton depositButton = new JButton("Deposit");
+        JButton withdrawButton = new JButton("Withdraw");
+        JButton logoutButton = new JButton("Logout");
 
-        var panel = new JPanel();
+        JPanel panel = new JPanel();
         panel.add(balanceLabel);
         panel.add(depositButton);
         panel.add(withdrawButton);
@@ -133,14 +134,14 @@ public class BankingUI {
         frame.revalidate();
 
         depositButton.addActionListener(e -> {
-            var amountStr = JOptionPane.showInputDialog("Enter amount to deposit:");
+            String amountStr = JOptionPane.showInputDialog("Enter amount to deposit:");
             if (amountStr == null || amountStr.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "Amount cannot be empty!");
                 return;
             }
 
             try {
-                var amount = Double.parseDouble(amountStr.trim());
+                double amount = Double.parseDouble(amountStr.trim());
                 if (amount <= 0) {
                     JOptionPane.showMessageDialog(frame, "Amount must be greater than zero!");
                     return;
@@ -154,14 +155,14 @@ public class BankingUI {
         });
 
         withdrawButton.addActionListener(e -> {
-            var amountStr = JOptionPane.showInputDialog("Enter amount to withdraw:");
+            String amountStr = JOptionPane.showInputDialog("Enter amount to withdraw:");
             if (amountStr == null || amountStr.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(frame, "Amount cannot be empty!");
                 return;
             }
 
             try {
-                var amount = Double.parseDouble(amountStr.trim());
+                double amount = Double.parseDouble(amountStr.trim());
                 if (amount <= 0) {
                     JOptionPane.showMessageDialog(frame, "Amount must be greater than zero!");
                     return;
