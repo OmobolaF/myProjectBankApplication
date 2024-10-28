@@ -21,15 +21,16 @@ public class BankingUI {
     private String currentUser;          // Stores the username of the logged-in user
 
     public BankingUI() {
-        bankService = new BankService(); // Initialize the BankService
+        bankService = new BankService(); // The constructor initializes the bankService and calls createLoginScreen() to set up the first screen (login screen) that the user sees.
         createLoginScreen();             // Display the login screen
     }
 
-    // Method to create the login screen
+    // Method to create the login screen. This line sets up the main frame (window) of the application and gives it a title.
     private void createLoginScreen() {
         frame = new JFrame("Banking Application");  // Initialize frame with a title
 
-        // Set up the panel with GridBagLayout for flexible component arrangement
+        
+        //Creates a JPanel using GridBagLayout, which allows flexible placement of components (like buttons and labels) in a grid format.
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);        // Padding around components
@@ -70,14 +71,18 @@ public class BankingUI {
         JButton signupButton = new JButton("Sign Up");
         gbc.gridx = 1;
         gbc.gridy = 2;
-        panel.add(signupButton, gbc);               // Add signup button to the panel
+        panel.add(signupButton, gbc);                                 // Add signup button to the panel
 
-        frame.add(panel);                           // Add the panel to the frame
-        frame.setSize(400, 200);                    // Set frame size
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // Exit app on close
-        frame.setVisible(true);                     // Make frame visible
+        frame.add(panel);                                           // Add the panel to the frame
+        frame.setSize(400, 200);                      // Set frame size
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);     // Exit app on close
+        frame.setVisible(true);                                // Make frame visible
 
         // Action listener for login button
+        //This listens for the login button click:
+        //Retrieves the text from usernameField and passwordField.
+        //Converts passwordField into a String.
+
         loginButton.addActionListener(e -> {
             String username = usernameField.getText().trim();
             String password = new String(passwordField.getPassword()).trim();
